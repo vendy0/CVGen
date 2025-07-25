@@ -59,13 +59,13 @@ body {
 body {
 	display: grid;
 	grid-template-columns: 40% 60%;
-	font-family: "EB Garamond", serif;
+	font-family: "Times New Roman", serif;
 }
 
 .presentation-first-part {
 	display: flex;
 	flex-direction: column;
-	color: #ddd;
+	color: #eee;
 	align-items: center;
 	justify-content: center;
 }
@@ -74,18 +74,20 @@ body {
 	border: none;
 }
 
-h1 {
-	font-size: 2em;
-}
-
 .name {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	margin: 0;
-	padding: 0;
 	letter-spacing: 2px;
+	font-size: 1.2em;
+	max-width: 97%;
+	margin: 10px;
+}
+
+.first-name,
+.last-name {
+	max-width: 95%;
 }
 
 * {
@@ -93,8 +95,8 @@ h1 {
 }
 
 .presentation-first-part {
-	background: darkgreen;
-	padding: 10px;
+	background: #004e12;
+	padding: 15px;
 }
 
 img {
@@ -103,6 +105,7 @@ img {
 	-moz-border-radius: 50%;
 	border-radius: 50%;
 	aspect-ratio: 1/1;
+	object-fit: cover;
 }
 
 .presentation-second-part {
