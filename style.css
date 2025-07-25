@@ -102,10 +102,10 @@ body {
   align-items: center;
   text-align: center;
 }
-
+/*
 * {
   border: 1px solid skyblue;
-}
+}*/
 
 .presentation-first-part {
   background: #004e12;
@@ -172,6 +172,9 @@ svg {
   border: none;
 }
 
-.presentation-second-part{
+.presentation-second-part {
+  border: none;
+}
+.left-column{
   border: none;
 }
