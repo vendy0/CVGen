@@ -1,3 +1,32 @@
-img{
+/** @format */
+*{
+	border: 1px solid skyblue;
+}
+
+.presentation-first-part{
+	background: green;
+}
+
+img {
 	width: 100%;
+}
+
+.presentation-second-part{
+	color: #fff;
+}
+
+.profil{
+	background: silver;
+}
+
+.interests{
+	background: darkred;
+}
+
+.languages{
+	background: gray;
+}
+
+.habilities{
+	background: darkblue;
 }
