@@ -56,10 +56,17 @@ body {
   color: #000;
 }
 
+html,
+body {
+  width: 700px;
+  height: 990px;
+  overflow: hidden; /* ou scroll/auto */
+}
+
 body {
   display: grid;
   grid-template-columns: 40% 60%;
-  font-family: "Times New Roman", serif;
+  color: #474747;
 }
 
 .presentation-first-part {
@@ -80,18 +87,20 @@ body {
   align-items: center;
   justify-content: center;
   letter-spacing: 2px;
-  font-size: 4vw;
-  max-width: 97%;
-  margin: 10px;
+  font-size: 1.5em;
+  margin-block: 10px;
   text-align: center;
   hyphens: auto;
 }
 
-.occupation{
-  font-size: 3vw;
+.occupation {
+  font-size: 5vw;
+  letter-spacing: 5px;
+  opacity: 0.8;
   font-style: italic;
   max-width: 95%;
-  align-items: center;text-align: center;
+  align-items: center;
+  text-align: center;
 }
 
 * {
@@ -112,14 +121,6 @@ img {
   object-fit: cover;
 }
 
-.presentation-second-part {
-  color: #fff;
-}
-
-.profil {
-  background: silver;
-}
-
 .interests {
   background: darkred;
 }
@@ -130,4 +131,47 @@ img {
 
 .habilities {
   background: darkblue;
+}
+
+.presentation-second-part {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+}
+
+.profil,
+.interests,
+.languages,
+.habilities {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.title {
+  padding-block: 5px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.profil-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+svg {
+  width: 20px;
+}
+
+.profil * {
+  border: none;
+}
+
+.presentation-second-part{
+  border: none;
 }
