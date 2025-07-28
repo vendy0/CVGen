@@ -109,13 +109,10 @@ img {
 }
 
 .presentation-second-part {
-  padding: 10px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   border-right: 2px solid #47474762;
-}
-
-.title {
 }
 
 .profil,
@@ -128,6 +125,7 @@ img {
 }
 
 .title {
+  font-size: 1.4em;
   padding-block: 5px;
   letter-spacing: 5px;
   text-transform: uppercase;
@@ -156,6 +154,18 @@ svg {
 }
 
 .rigth-column {
-  padding-block: 100px;
+  padding-block: 80px;
   padding-inline: 40px;
+}
+
+.place-formation {
+  font-style: italic;
+}
+
+.formation {
+  padding-block: 20px;
+}
+
+.diplome {
+  font-weight: 550;
 }
