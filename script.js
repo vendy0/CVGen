@@ -22,6 +22,8 @@ const interestElements = document.getElementById("interest-elements");
 
 const newInterest = document.getElementById("new-interest");
 
+var compteurInterest = 0;
+
 const downloadButton = document.getElementById("download-button");
 
 let inputList = document.querySelectorAll("input");
@@ -76,17 +78,25 @@ function verifyAndChange(input, area, LSName, required = true) {
 }
 
 newInterest.addEventListener("click", () => {
-  let interestContainer = document.querySelector(".interests");
-  let echantillon = document.querySelector(".interest-elements");
+  let interestContainer = document.querySelector(".interest-elements");
+  let echantillon = document.querySelector(".interest-info");
   let echantillonTheme = document.getElementById("interest-theme");
   let echantillonElements = document.getElementById("interest-elements");
   let copiedInterest = echantillon.cloneNode(false);
   let copiedInterestTheme = echantillonTheme.cloneNode(false);
+  copiedInterestTheme.id = "interest-theme" + compteurInterest;
   let copiedInterestElements = echantillonElements.cloneNode(false);
+  copiedInterestElements.id = "interest-elements" + compteurInterest;
   copiedInterest.appendChild(copiedInterestTheme);
   copiedInterest.appendChild(copiedInterestElements);
   // copiedElement.innerText = "";
   interestContainer.appendChild(copiedInterest);
+
+  let interestInputContainer = document.querySelector(
+    ".interest-input-contaiiner"
+  );
+  let echantillonInput = document.compteurInterest++;
+  console.log(compteurInterest);
 });
 
 downloadButton.addEventListener("click", () => {
