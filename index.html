@@ -19,34 +19,35 @@
   </head>
   <body>
     <section class="formulaire">
-      <form action="..." method="get">
+      <form>
         <fieldset><legend>Formulaire</legend>
-        <label for="first-name">Prenom<input type="text" name="first-name" id="first-name" placeholder="Entrez votre prenom"></label>
+        <label for="first-name-input">Prenom <input type="text" name="first-name-input" id="first-name-input" placeholder="Entrez votre prenom" ></label>
         <br>
           
-        <label for="last-name">Nom <input type="text" name="last-name" id="last-name" placeholder="Entrer votre nom"></label>
+        <label for="last-name-input">Nom <input type="text" name="last-name-input" id="last-name-input" placeholder="Entrer votre nom" ></label>
         <br>
           
-        <label for="poste">Poste occupe<input type="text" name="poste" id="poste" placeholder="Entrez le poste que vous occupez"></label>
+        <label for="poste-input">Poste occupe <input type="text" name="poste-input" id="poste-input" placeholder="Entrez le poste que vous occupez" ></label>
         <br>
           
-        <label for="localisation">Adresse <input type="text" name="localisation" id="localisation" placeholder="Entrer votre adresse"></label>
+        <label for="localisation-input">Adresse <input type="text" name="localisation-input" id="localisation-input" placeholder="Entrer votre adresse" ></label>
         <br>
         
-        <label for="email">Email <input type="email" name="email" id="email" placeholder="Entrer votre email"></label>
+        <label for="email-input">Email <input type="email-input" name="email-input" id="email-input" placeholder="Entrer votre email" ></label>
         <br>
         
-        <label for="phone">Telephone <input type="number" name="phone" id="phone" placeholder="Entrer votre numero de telephone"></label>
+        <label for="phone-input">Telephone <input type="number" name="phone-input" id="phone-input" placeholder="Entrer votre numero de telephone" ></label>
         <br>
         
-        <button type="submit">Soumettre</button>
+        <br>
+        <button id="submit">Soumettre</button>
         </fieldset>
       </form>
     </section>
     <section class="curiculum">
       <section class="left-column">
         <section class="presentation-first-part">
-          <img src="./assets/IMG-20250619-WA0055.jpg" alt="" />
+          <img src="./assets/IMG-20250619-WA0055.jpg" alt="" id="picture"/>
           <h1 class="name">
             <span class="first-name">Andy Venson</span
             ><span class="last-name">Descartes</span>
@@ -261,5 +262,7 @@
           </section>
       </section>
     </section>
+
+    <script src="./script.js"></script>
   </body>
 </html>
