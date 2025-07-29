@@ -6,6 +6,11 @@ const posteInput = document.getElementById("poste-input");
 const localisationInput = document.getElementById("localisation-input");
 const emailInput = document.getElementById("email-input");
 const phoneInput = document.getElementById("phone-input");
+const interestThemeInput = document.getElementById("interest-theme-input");
+const interestElementsInput = document.getElementById(
+	"interest-elements-input"
+);
+const interestTheme = document.getElementById("interest-theme");
 
 const firstName = document.getElementById("first-name");
 const lastName = document.getElementById("last-name");
@@ -13,13 +18,10 @@ const poste = document.getElementById("poste");
 const localisation = document.getElementById("localisation");
 const email = document.getElementById("email");
 const phone = document.getElementById("phone");
-
-const interestThemeInput = document.getElementById("interest-theme-input");
-const interestElementsInput = document.getElementById(
-	"interest-elements-input"
-);
-const interestTheme = document.getElementById("interest-theme");
 const interestElements = document.getElementById("interest-elements");
+const newInterest = document.getElementById("new-interest");
+
+const downloadButton = document.getElementById("download-button");
 
 let inputList = document.querySelectorAll("input");
 inputList.forEach((input) => {
@@ -54,6 +56,7 @@ window.addEventListener("load", () => {
 	restore("email", emailInput, email);
 	restore("phone", phoneInput, phone);
 	restore("interestTheme", interestThemeInput, interestTheme);
+	restore("interestElements", interestElementsInput, interestElements);
 });
 
 function restore(LSElement, input, area) {
@@ -68,8 +71,28 @@ function verifyAndChange(input, area, LSName, required = true) {
 	} else {
 		area.textContent = input.value.trim();
 	}
-	localStorage.setItem(LSName, input.value.trim());
+	// localStorage.setItem(LSName, input.value.trim());
 }
 
-console.log(inputList);
+newInterest.addEventListener("click", () => {
+	downloadButton.addEventListener("click", () => {
+		const captureZone = document.querySelector(".curiculum");
+		html2canvas(captureZone)
+			.then((canvas) => {
+				// Convertit le canvas en une image PNG
+				const imageURL = canvas.toDataURL("image/png");
+				// Crée un lien de téléchargement
+				const a = document.createElement("a");
+				a.href = imageURL;
+				a.download = "pixel-art" + ".png";
+				a.click();
+			})
+			.catch((error) => {
+				console.error("Erreur lors de la capture :", error);
+				alert("Une erreur est survenue lors de la capture !");
+			});
+	});
+});
+
 console.log(localStorage);
+localStorage.clear();

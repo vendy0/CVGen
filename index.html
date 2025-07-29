@@ -13,6 +13,8 @@
 		<link
 			href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap"
 			rel="stylesheet" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 		<link rel="stylesheet" href="style.css" type="text/css" media="all" />
 		<title>CVGen</title>
 	</head>
@@ -27,12 +29,12 @@
 						src="./assets/IMG-20250729-WA0010-removebg-preview.png"
 						alt="" />
 					<label for="first-name-input"
-						>Prenom
+						>Prénom
 						<input
 							type="text"
 							name="first-name-input"
 							id="first-name-input"
-							placeholder="Entrez votre prenom"
+							placeholder="Entrez votre prénom"
 					/></label>
 					<br />
 
@@ -62,53 +64,57 @@
 							type="text"
 							name="localisation-input"
 							id="localisation-input"
-							placeholder="Entrer votre adresse"
+							placeholder="Entrez votre adresse"
 					/></label>
 					<br />
 
 					<label for="email-input"
 						>Email
 						<input
-							type="email-input"
+							type="email"
 							name="email-input"
 							id="email-input"
-							placeholder="Entrer votre email"
+							placeholder="Entrez votre email"
 					/></label>
 					<br />
 
 					<label for="phone-input"
-						>Telephone
+						>Téléphone
 						<input
 							type="number"
 							name="phone-input"
 							id="phone-input"
-							placeholder="Entrer votre numero de telephone"
+							placeholder="Entrez votre numéro de téléphone"
 					/></label>
 					<br />
 
 					<hr style="margin-block: 30px" />
 
 					<legend>Centre d'intérêt</legend>
-					<label for="interst-theme-input"
-						>Thème
-						<input
-							type="text"
-							name="interest-theme-input"
-							id="interest-theme-input"
-							value=""
-							placeholder="Centre d'intérêt : Thème"
-					/></label>
-					<br />
-					<label for="interst-elements-input"
-						>Éléments<textarea
-							name="interest-elements-input"
-							id="interest-elements-input"
-							rows="2"
-							cols="20"
-							placeholder="Centre d'intérêt : Éléments"></textarea>
-					</label>
+					<div class="interests-input">
+						<label for="interest-theme-input"
+							>Thème
+							<input
+								type="text"
+								name="interest-theme-input"
+								id="interest-theme-input"
+								value=""
+								placeholder="Centre d'intérêt : Thème"
+						/></label>
+						<br />
+						<label for="interst-elements-input"
+							>Éléments<textarea
+								name="interest-elements-input"
+								id="interest-elements-input"
+								rows="2"
+								cols="20"
+								placeholder="Centre d'intérêt : Éléments"></textarea>
+						</label>
+					</div>
+					<button type="button" id="new-interest">Ajouter</button>
 				</fieldset>
 			</form>
+			<button id="download-button" type="submit">Télécharger</button>
 		</section>
 		<section class="curiculum">
 			<section class="left-column">
@@ -183,18 +189,6 @@
 								<span id="interest-elements"
 									>Basketball, Football, Natation</span
 								>
-							</div>
-							<div class="interest-info">
-								<span class="interest-icon"
-									>Littérature :
-								</span>
-								<span class="interest-label"
-									>Lecture et écriture</span
-								>
-							</div>
-							<div class="interest-info">
-								<span class="interest-icon">Bénévolat : </span>
-								<span class="interest-label"></span>
 							</div>
 						</div>
 					</section>
@@ -286,7 +280,7 @@
 						<ul class="post-list">
 							<li class="list-item">...</li>
 							<li class="list-item">...</li>
-							<li classe="list-item">...</li>
+							<li class="list-item">...</li>
 						</ul>
 					</section>
 
@@ -305,7 +299,7 @@
 						<ul class="post-list">
 							<li class="list-item">...</li>
 							<li class="list-item">...</li>
-							<li classe="list-item">...</li>
+							<li class="list-item">...</li>
 						</ul>
 					</section>
 
@@ -324,7 +318,7 @@
 						<ul class="post-list">
 							<li class="list-item">...</li>
 							<li class="list-item">...</li>
-							<li classe="list-item">...</li>
+							<li class="list-item">...</li>
 						</ul>
 					</section>
 

@@ -155,13 +155,13 @@ svg {
 .profil-info {
 	margin: 10px;
 }
-
+/* 
 .language-label,
 .hability-label {
 	background: silver;
 	border-radius: 5px;
 	padding-inline: 10px;
-}
+} */
 
 .rigth-column {
 	display: flex;
