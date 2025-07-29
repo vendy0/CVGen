@@ -1,3 +1,5 @@
+/** @format */
+
 const firstNameInput = document.getElementById("first-name-input");
 const lastNameInput = document.getElementById("last-name-input");
 const posteInput = document.getElementById("poste-input");
@@ -5,56 +7,69 @@ const localisationInput = document.getElementById("localisation-input");
 const emailInput = document.getElementById("email-input");
 const phoneInput = document.getElementById("phone-input");
 
-const firstName = document.querySelector(".first-name");
-const lastName = document.querySelector(".last-name");
-const poste = document.querySelector(".poste");
-const localisation = document.querySelector(".localisation");
-const email = document.querySelector(".email");
-const phone = document.querySelector(".phone");
+const firstName = document.getElementById("first-name");
+const lastName = document.getElementById("last-name");
+const poste = document.getElementById("poste");
+const localisation = document.getElementById("localisation");
+const email = document.getElementById("email");
+const phone = document.getElementById("phone");
 
-const submitButton = document.getElementById("submit");
+const interestThemeInput = document.getElementById("interest-theme-input");
+const interestElementsInput = document.getElementById(
+	"interest-elements-input"
+);
+const interestTheme = document.getElementById("interest-theme");
+const interestElements = document.getElementById("interest-elements");
 
-restore(firstName);
-restore(lastName);
-restore(poste);
-restore(localisation);
-restore(email);
-restore(phone);
-
-// Changer le texte du bouton
-function changeText(element, input) {
-  element.textContent = input.value.trim();
-  localStorage.setItem(element.textContent, input);
-}
-
-// Charger depuis le localStorage
-function restore(element) {
-  let elementStored = localStorage.getItem(element);
-  element.textContent = elementStored;
-}
-
-submitButton.addEventListener("click", () => {
-  if (
-    firstNameInput.value.trim() ||
-    lastNameInput.value.trim() ||
-    poste.value.trim() ||
-    localisationInput.value.trim() ||
-    emailInput.value.trim() ||
-    phoneInput.value.trim()
-  ) {
-    if (firstNameInput.value.trim())
-      changeText(firstName, firstNameInput.value.trim());
-    if (lastNameInput.value.trim())
-      changeText(lastName, lastNameInput.value.trim());
-    if (posteInput.value.trim()) changeText(poste, posteInput.value.trim());
-    if (localisationInput.value.trim())
-      changeText(localisation, localisationInput.value.trim());
-    if (emailInput.value.trim()) changeText(email, emailInput.value.trim());
-    if (phoneInput.value.trim()) changeText(phone, phoneInput.value.trim());
-  }
+let inputList = document.querySelectorAll("input");
+inputList.forEach((input) => {
+	input.addEventListener("change", () => {
+		verifyAndChange(firstNameInput, firstName, "firstName");
+		verifyAndChange(lastNameInput, lastName, "lastName");
+		verifyAndChange(posteInput, poste, "poste");
+		verifyAndChange(localisationInput, localisation, "localisation");
+		verifyAndChange(emailInput, email, "email");
+		verifyAndChange(phoneInput, phone, "phone");
+		verifyAndChange(interestThemeInput, interestTheme, "interestTheme");
+	});
 });
 
-// Ctrl + U
+let textAreaList = document.querySelectorAll("textarea");
+textAreaList.forEach((textArea) => {
+	textArea.addEventListener("change", () => {
+		verifyAndChange(
+			interestElementsInput,
+			interestElements,
+			"interestElements",
+			false
+		);
+	});
+});
 
-localStorage.clear();
+window.addEventListener("load", () => {
+	restore("firstName", firstNameInput, firstName);
+	restore("lastName", lastNameInput, lastName);
+	restore("poste", posteInput, poste);
+	restore("localisation", localisationInput, localisation);
+	restore("email", emailInput, email);
+	restore("phone", phoneInput, phone);
+	restore("interestTheme", interestThemeInput, interestTheme);
+});
+
+function restore(LSElement, input, area) {
+	let elementStored = localStorage.getItem(LSElement);
+	area.textContent = elementStored;
+	input.value = elementStored;
+}
+
+function verifyAndChange(input, area, LSName, required = true) {
+	if (required) {
+		if (input.value.trim()) area.textContent = input.value.trim();
+	} else {
+		area.textContent = input.value.trim();
+	}
+	localStorage.setItem(LSName, input.value.trim());
+}
+
+console.log(inputList);
 console.log(localStorage);
