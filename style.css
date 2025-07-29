@@ -1,4 +1,4 @@
-/** @format */
+/* * @format
 
 /* Modern CSS Reset */
 *,
@@ -6,7 +6,7 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  /* padding: 0; */
 }
 
 html,
@@ -22,7 +22,7 @@ video,
 canvas,
 svg {
   display: block;
-  max-width: 100%;
+  /* max-width: 100%; */
 }
 
 input,
@@ -154,7 +154,10 @@ svg {
 }
 
 .rigth-column {
-  padding-block: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
   padding-inline: 40px;
 }
 
@@ -168,4 +171,8 @@ svg {
 
 .diplome {
   font-weight: 550;
+}
+
+.rigth-section-label {
+  font-size: 1.2em;
 }
