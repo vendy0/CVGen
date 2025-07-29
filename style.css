@@ -30,10 +30,10 @@ button,
 textarea,
 select {
   font: inherit;
-  color: inherit;
-  background: none;
-  border: none;
-  outline: none;
+  /* color: inherit; */
+  /* background: none; */
+  /* border: none; */
+  /* outline: none; */
 }
 
 a {
@@ -51,6 +51,7 @@ body {
   background-color: #fff;
   color: #000;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   padding-block: 650px;
@@ -175,4 +176,14 @@ svg {
 
 .rigth-section-label {
   font-size: 1.2em;
+}
+
+.formulaire {
+  padding: 100px;
+  margin: 100px;
+}
+
+fieldset {
+  background: #f8f8f8;
+  border-radius: 20px;
 }
