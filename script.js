@@ -100,8 +100,13 @@ newInterest.addEventListener("click", () => {
   let echantillonElementsInput = document.getElementById(
     "interest-elements-input"
   );
+  let copiedInput = echantillon.cloneNode(true);
+  let copiedThemeInput = copiedInput.querySelector("input");
+  // copiedThemeInput.value = "";
+  copiedThemeInput.id = "interest-theme-input" + compteurInterest;
+  let copiedElementsInput = copiedInput.querySelector("textarea");
 
-  let copiedInput = echantillon.cloneNode(false);
+  /*
   copiedInput.id = "interests-input" + compteurInterest;
   let copiedThemeInput = echantillonThemeInput.cloneNode(true);
   copiedThemeInput.id = "interest-theme-input" + compteurInterest;
@@ -110,16 +115,18 @@ newInterest.addEventListener("click", () => {
   let copiedElementsInput = echantillonElementsInput.cloneNode(true);
   copiedElementsInput.id = "interest-elements-input" + compteurInterest;
   copiedElementsInput.value = "";
-  
+
   let fieldset = document.createElement("fieldset");
 
   echantillonInput.appendChild(fieldset);
   fieldset.appendChild(copiedThemeInput);
   fieldset.appendChild(copiedElementsInput);
   interestInputContainer.appendChild(echantillonInput);
+  */
 
   compteurInterest++;
   console.log(compteurInterest);
+  console.log(copiedInput);
   console.log(copiedElementsInput.id);
   console.log(copiedThemeInput.id);
 });
