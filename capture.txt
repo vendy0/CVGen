@@ -1,0 +1,26 @@
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+
+
+
+//Capture d'écran
+captureBtn.addEventListener("click", function () {
+	const captureZone = document.getElementById("all-boxes");
+	html2canvas(captureZone)
+		.then((canvas) => {
+			// Convertit le canvas en une image PNG
+			const imageURL = canvas.toDataURL("image/png");
+			// Crée un lien de téléchargement
+			const a = document.createElement("a");
+			a.href = imageURL;
+			a.download = (imgName || "pixel-art") + ".png";
+			a.click();
+			downloadButton.style.display = "none";
+			downloadButton.style.backgroundColor = "var(--clr-active)";
+		})
+		.catch((error) => {
+			console.error("Erreur lors de la capture :", error);
+			alert("Une erreur est survenue lors de la capture !");
+		});
+});
