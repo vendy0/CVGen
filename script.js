@@ -161,6 +161,12 @@ window.addEventListener("load", () => {
 	let nbInterets = parseInt(localStorage.getItem("inputInteretAjoutes") || 0)
 	for (let i = 0; i < nbInterets; i++) {
 		ajouterCentreInteret()
+		let theme = document.getElementById(
+			"affichage-theme-interet-input-" + i
+		)
+		theme.value = 
+			localStorage.getItem("affichage-theme-interet-input-" + i)
+		console.log(theme)
 	}
 })
 
