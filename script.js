@@ -20,21 +20,27 @@ const affichagePoste = document.getElementById("affichage-poste")
 const affichageLocalisation = document.getElementById("affichage-localisation")
 const affichageEmail = document.getElementById("affichage-email")
 const affichagePhone = document.getElementById("affichage-telephone")
-const affichageDetailsInteret = document.getElementById("affichage-details-interet")
+const affichageDetailsInteret = document.getElementById(
+	"affichage-details-interet"
+)
 
 // Boutons d’action
 const btnAjouterInteret = document.getElementById("btn-ajouter-interet")
 const btnSupprimerInteret = document.getElementById("btn-supprimer-interet")
 const btnTelechargerCV = document.getElementById("btn-telecharger-cv")
+const btnReset = document.getElementById("btn-reset")
 
 // Sélections globales pour champs texte
-var tousLesChampsInput = document.querySelectorAll('input[type="text"]')
+var tousLesChampsInput = document.querySelectorAll('input:not([type="button"])')
 var tousLesChampsTextarea = document.querySelectorAll("textarea")
 
 // Compteurs d’intérêts sauvegardés dans localStorage
-var compteurInteretsAjoutes = parseInt(localStorage.getItem("compteurInteretsAjoutes") || 0)
-var inputInteretAjoutes = parseInt(localStorage.getItem("inputInteretAjoutes") || 0)
-
+var compteurInteretsAjoutes = parseInt(
+	localStorage.getItem("compteurInteretsAjoutes") || 0
+)
+var inputInteretAjoutes = parseInt(
+	localStorage.getItem("inputInteretAjoutes") || 0
+)
 
 /* ======= FONCTIONS ======= */
 
@@ -51,7 +57,9 @@ function restaurerDepuisLocalStorage(LSElement, input, area) {
 function creerBlocAffichageInteret(id) {
 	const echantillon = document.querySelector(".interest-info")
 	const echantillonTheme = document.getElementById("affichage-theme-interet")
-	const echantillonDetails = document.getElementById("affichage-details-interet")
+	const echantillonDetails = document.getElementById(
+		"affichage-details-interet"
+	)
 
 	let bloc = echantillon.cloneNode(false)
 	let theme = echantillonTheme.cloneNode(false)
@@ -62,7 +70,7 @@ function creerBlocAffichageInteret(id) {
 	bloc.appendChild(theme)
 	bloc.appendChild(details)
 
-	return { bloc, theme, details }
+	return {bloc, theme, details}
 }
 
 // Crée un bloc de formulaire pour un centre d’intérêt (dans la zone formulaire)
@@ -78,7 +86,7 @@ function creerBlocFormulaireInteret(id) {
 	details.value = ""
 	details.id = "input-elements-interet-" + id
 
-	return { bloc, theme, details }
+	return {bloc, theme, details}
 }
 
 // Ajoute les écouteurs qui synchronisent formulaire et affichage en direct + stockage local
@@ -128,10 +136,19 @@ function ajouterCentreInteret(firstTime = true) {
 	const blocAffichage = creerBlocAffichageInteret(id)
 	const blocFormulaire = creerBlocFormulaireInteret(id)
 
-	document.querySelector(".affichage-interet-container").appendChild(blocAffichage.bloc)
-	document.querySelector(".input-interet-container").appendChild(blocFormulaire.bloc)
+	document
+		.querySelector(".affichage-interet-container")
+		.appendChild(blocAffichage.bloc)
+	document
+		.querySelector(".input-interet-container")
+		.appendChild(blocFormulaire.bloc)
 
-	listener(blocFormulaire.theme, blocFormulaire.details, blocAffichage.theme, blocAffichage.details)
+	listener(
+		blocFormulaire.theme,
+		blocFormulaire.details,
+		blocAffichage.theme,
+		blocAffichage.details
+	)
 
 	compteurInteretsAjoutes++
 	localStorage.setItem("compteurInteretsAjoutes", compteurInteretsAjoutes)
@@ -158,8 +175,14 @@ function supprimerInteret() {
 
 	if (listeInteretsAffiches.length <= 1) return
 	listeInteretsAffiches[listeInteretsAffiches.length - 1].remove()
-	let idRemoveElements = "input-elements-interet-" + (listeInteretsAffiches.length - 2)
+	let idRemoveElements =
+		"input-elements-interet-" + (listeInteretsAffiches.length - 2)
 	localStorage.removeItem(idRemoveElements)
+}
+
+function reinitialiser() {
+	localStorage.clear()
+	location.reload()
 }
 
 /* ======= INITIALISATION & ÉCOUTEURS D'ÉVÉNEMENTS ======= */
@@ -169,11 +192,23 @@ window.addEventListener("load", () => {
 	restaurerDepuisLocalStorage("affichagePrenom", inputPrenom, affichagePrenom)
 	restaurerDepuisLocalStorage("affichageNom", inputNom, affichageNom)
 	restaurerDepuisLocalStorage("affichagePoste", inputPoste, affichagePoste)
-	restaurerDepuisLocalStorage("affichageLocalisation", inputLocalisation, affichageLocalisation)
+	restaurerDepuisLocalStorage(
+		"affichageLocalisation",
+		inputLocalisation,
+		affichageLocalisation
+	)
 	restaurerDepuisLocalStorage("affichageEmail", inputEmail, affichageEmail)
 	restaurerDepuisLocalStorage("affichagePhone", inputPhone, affichagePhone)
-	restaurerDepuisLocalStorage("affichageThemeInteret", inputThemeInteret, affichageThemeInteret)
-	restaurerDepuisLocalStorage("affichageDetailsInteret", inputDetailsInteret, affichageDetailsInteret)
+	restaurerDepuisLocalStorage(
+		"affichageThemeInteret",
+		inputThemeInteret,
+		affichageThemeInteret
+	)
+	restaurerDepuisLocalStorage(
+		"affichageDetailsInteret",
+		inputDetailsInteret,
+		affichageDetailsInteret
+	)
 	compteurInteretsAjoutes = 0
 
 	let nbInterets = parseInt(localStorage.getItem("inputInteretAjoutes") || 0)
@@ -182,12 +217,16 @@ window.addEventListener("load", () => {
 
 		let theme = document.getElementById("theme-interet-input-" + i)
 		theme.value = localStorage.getItem("theme-interet-input-" + i)
-		let affichageTheme = document.getElementById("affichage-theme-interet-" + i)
+		let affichageTheme = document.getElementById(
+			"affichage-theme-interet-" + i
+		)
 		affichageTheme.textContent = theme.value
 
 		let details = document.getElementById("input-elements-interet-" + i)
 		details.value = localStorage.getItem("input-elements-interet-" + i)
-		let affichageDetails = document.getElementById("affichage-details-interet-" + i)
+		let affichageDetails = document.getElementById(
+			"affichage-details-interet-" + i
+		)
 		affichageDetails.textContent = details.value
 	}
 })
@@ -195,26 +234,44 @@ window.addEventListener("load", () => {
 // Mise à jour des champs principaux lors de toute modification
 tousLesChampsInput.forEach((input) => {
 	input.addEventListener("change", () => {
-		verifierEtMettreAJourChamp(inputPrenom, affichagePrenom, "affichagePrenom")
+		verifierEtMettreAJourChamp(
+			inputPrenom,
+			affichagePrenom,
+			"affichagePrenom"
+		)
 		verifierEtMettreAJourChamp(inputNom, affichageNom, "affichageNom")
 		verifierEtMettreAJourChamp(inputPoste, affichagePoste, "affichagePoste")
-		verifierEtMettreAJourChamp(inputLocalisation, affichageLocalisation, "affichageLocalisation")
+		verifierEtMettreAJourChamp(
+			inputLocalisation,
+			affichageLocalisation,
+			"affichageLocalisation"
+		)
 		verifierEtMettreAJourChamp(inputEmail, affichageEmail, "affichageEmail")
 		verifierEtMettreAJourChamp(inputPhone, affichagePhone, "affichagePhone")
-		verifierEtMettreAJourChamp(inputThemeInteret, affichageThemeInteret, "affichageThemeInteret")
+		verifierEtMettreAJourChamp(
+			inputThemeInteret,
+			affichageThemeInteret,
+			"affichageThemeInteret"
+		)
 	})
 })
 
 // Mise à jour des zones de texte lors de toute modification
 tousLesChampsTextarea.forEach((textArea) => {
 	textArea.addEventListener("change", () => {
-		verifierEtMettreAJourChamp(inputDetailsInteret, affichageDetailsInteret, "affichageDetailsInteret", false)
+		verifierEtMettreAJourChamp(
+			inputDetailsInteret,
+			affichageDetailsInteret,
+			"affichageDetailsInteret",
+			false
+		)
 	})
 })
 
 // Ajout / suppression dynamique d’un intérêt via boutons
 btnAjouterInteret.addEventListener("click", ajouterCentreInteret)
 btnSupprimerInteret.addEventListener("click", supprimerInteret)
+btnReset.addEventListener("click", reinitialiser)
 
 // Capture et téléchargement du CV au clic
 btnTelechargerCV.addEventListener("click", () => {
