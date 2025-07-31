@@ -24,6 +24,7 @@ const affichageDetailsInteret = document.getElementById(
 
 // Boutons principaux
 const btnAjouterInteret = document.getElementById("btn-ajouter-interet")
+const btnSupprimerInteret = document.getElementById("btn-supprimer-interet")
 const btnTelechargerCV = document.getElementById("btn-telecharger-cv")
 
 // Sélection des champs de saisie texte
@@ -151,6 +152,24 @@ function sauvegarderNombreInteret() {
 	}
 }
 
+function supprimerInteret() {
+	let listeInteretsAffiches = document.querySelectorAll(".interest-info")
+	if (listeInteretsAffiches.length <= 1) return
+	listeInteretsAffiches[listeInteretsAffiches.length - 1].remove()
+
+	let listeInteretsInput = document.querySelectorAll(".input-interets")
+	if (listeInteretsInput.length <= 1) return
+	listeInteretsInput[listeInteretsInput.length - 1].remove()
+
+	inputInteretAjoutes = listeInteretsInput.length - 1
+	compteurInteretsAjoutes = listeInteretsInput.length - 1
+	localStorage.setItem("inputInteretAjoutes", inputInteretAjoutes)
+	localStorage.setItem("compteurInteretsAjoutes", compteurInteretsAjoutes)
+	let idRemove = "theme-interet-input-" + (listeInteretsInput.length - 2)
+	localStorage.removeItem(idRemove)
+	localStorage.removeItem("")
+}
+
 // Initialisation au chargement de la page
 window.addEventListener("load", () => {
 	// Restauration des champs principaux depuis localStorage
@@ -236,6 +255,8 @@ tousLesChampsTextarea.forEach((textArea) => {
 
 // Ajout dynamique d’un intérêt lors du clic sur le bouton
 btnAjouterInteret.addEventListener("click", ajouterCentreInteret)
+
+btnSupprimerInteret.addEventListener("click", supprimerInteret)
 
 // Capture et téléchargement du CV en PNG
 btnTelechargerCV.addEventListener("click", () => {
