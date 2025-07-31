@@ -196,7 +196,7 @@ select {
 	border: 1px solid #ccc;
 }
 
-input:focus {
+input:focus-visible {
 	border-color: #004e12;
 	outline: none;
 }
@@ -204,4 +204,8 @@ input:focus {
 button:hover {
 	transform: scale(1.05);
 	transition: all 0.3s ease;
+}
+
+input, button, select {
+	cursor: pointer;
 }
