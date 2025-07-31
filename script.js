@@ -102,7 +102,7 @@ function creerBlocFormulaireInteret(id) {
 	let bloc = echantillonInput.cloneNode(true)
 	let theme = bloc.querySelector("input")
 	theme.value = ""
-	theme.id = "affichage-theme-interet-input-" + id
+	theme.id = "theme-interet-input-" + id
 
 	let details = bloc.querySelector("textarea")
 	details.value = ""
@@ -120,6 +120,7 @@ function listener(inputTheme, inputDetails, areaTheme, areaDetails) {
 		}
 	})
 	inputDetails.addEventListener("change", () => {
+		localStorage.setItem(inputDetails.id, inputDetails.value.trim())
 		if (inputDetails) {
 			areaDetails.textContent = inputDetails.value.trim()
 		}
@@ -179,13 +180,20 @@ window.addEventListener("load", () => {
 	let nbInterets = parseInt(localStorage.getItem("inputInteretAjoutes") || 0)
 	for (let i = 0; i < nbInterets; i++) {
 		ajouterCentreInteret()
-		let theme = document.getElementById(
-			"affichage-theme-interet-input-" + i
-		)
-		theme.value = localStorage.getItem("affichage-theme-interet-input-" + i)
-		let affichage = document.getElementById("affichage-theme-interet-" + i)
-		affichage.textContent = theme.value
 
+		let theme = document.getElementById("theme-interet-input-" + i)
+		theme.value = localStorage.getItem("theme-interet-input-" + i)
+		let affichageTheme = document.getElementById(
+			"affichage-theme-interet-" + i
+		)
+		affichageTheme.textContent = theme.value
+
+		let details = document.getElementById("input-elements-interet-" + i)
+		details.value = localStorage.getItem("input-elements-interet-" + i)
+		let affichageDetails = document.getElementById(
+			"affichage-details-interet-" + i
+		)
+		affichageDetails.textContent = details.value
 	}
 })
 
