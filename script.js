@@ -153,21 +153,25 @@ function sauvegarderNombreInteret() {
 }
 
 function supprimerInteret() {
-	let listeInteretsAffiches = document.querySelectorAll(".interest-info")
-	if (listeInteretsAffiches.length <= 1) return
-	listeInteretsAffiches[listeInteretsAffiches.length - 1].remove()
-
 	let listeInteretsInput = document.querySelectorAll(".input-interets")
+	let listeInteretsAffiches = document.querySelectorAll(".interest-info")
+
 	if (listeInteretsInput.length <= 1) return
 	listeInteretsInput[listeInteretsInput.length - 1].remove()
+
+	let idRemoveTheme = "theme-interet-input-" + (listeInteretsInput.length - 2)
+	localStorage.removeItem(idRemoveTheme)
 
 	inputInteretAjoutes = listeInteretsInput.length - 1
 	compteurInteretsAjoutes = listeInteretsInput.length - 1
 	localStorage.setItem("inputInteretAjoutes", inputInteretAjoutes)
 	localStorage.setItem("compteurInteretsAjoutes", compteurInteretsAjoutes)
-	let idRemove = "theme-interet-input-" + (listeInteretsInput.length - 2)
-	localStorage.removeItem(idRemove)
-	localStorage.removeItem("")
+
+	if (listeInteretsAffiches.length <= 1) return
+	listeInteretsAffiches[listeInteretsAffiches.length - 1].remove()
+	let idRemoveElements =
+		"input-elements-interet-" + (listeInteretsAffiches.length - 2)
+	localStorage.removeItem(idRemoveElements)
 }
 
 // Initialisation au chargement de la page
