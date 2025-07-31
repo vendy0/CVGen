@@ -1,28 +1,32 @@
 /** @format */
 
-const inputPrenom = document.getElementById("first-name-input");
-const inputNom = document.getElementById("last-name-input");
-const inputPoste = document.getElementById("poste-input");
-const inputLocalisation = document.getElementById("localisation-input");
-const inputEmail = document.getElementById("email-input");
-const inputPhone = document.getElementById("phone-input");
-const inputThemeInteret = document.getElementById("interest-theme-input");
-const inputDetailsInteret = document.getElementById("interest-elements-input");
-const affichageThemeInteret = document.getElementById("interest-theme");
+const inputPrenom = document.getElementById("input-prenom");
+const inputNom = document.getElementById("input-nom");
+const inputPoste = document.getElementById("input-poste");
+const inputLocalisation = document.getElementById("input-localisation");
+const inputEmail = document.getElementById("input-email");
+const inputPhone = document.getElementById("input-telephone");
+const inputThemeInteret = document.getElementById("input-theme-interet");
+const inputDetailsInteret = document.getElementById("input-details-interet");
 
-const affichagePrenom = document.getElementById("first-name");
-const affichageNom = document.getElementById("last-name");
-const affichagePoste = document.getElementById("poste");
-const affichageLocalisation = document.getElementById("localisation");
-const affichageEmail = document.getElementById("email");
-const affichagePhone = document.getElementById("phone");
-const affichageDetailsInteret = document.getElementById("interest-elements");
+const affichageThemeInteret = document.getElementById(
+	"affichage-theme-interet"
+);
+const affichagePrenom = document.getElementById("affichage-prenom");
+const affichageNom = document.getElementById("affichage-nom");
+const affichagePoste = document.getElementById("affichage-poste");
+const affichageLocalisation = document.getElementById("affichage-localisation");
+const affichageEmail = document.getElementById("affichage-email");
+const affichagePhone = document.getElementById("affichage-telephone");
+const affichageDetailsInteret = document.getElementById(
+	"affichage-details-interet"
+);
 
-const btnAjouterInteret = document.getElementById("new-interest");
+const btnAjouterInteret = document.getElementById("btn-ajouter-interet");
 
 var compteurInteretsAjoutes = 0;
 
-const btnTelechargerCV = document.getElementById("download-button");
+const btnTelechargerCV = document.getElementById("btn-telecharger-cv");
 
 var tousLesChampsInput = document.querySelectorAll("input");
 tousLesChampsInput.forEach((input) => {
@@ -52,7 +56,7 @@ tousLesChampsInput.forEach((input) => {
 var tousLesChampsTextarea = document.querySelectorAll("textarea");
 tousLesChampsTextarea.forEach((textArea) => {
 	textArea.addEventListener("change", () => {
-		verifierEtMettreAJouChamp(
+		verifierEtMettreAJourChamp(
 			inputDetailsInteret,
 			affichageDetailsInteret,
 			"affichageDetailsInteret",
@@ -96,7 +100,7 @@ function restaurerDepuisLocalStorage(LSElement, input, area) {
 	}
 }
 
-function verifierEtMettreAJouChamp(input, area, LSName, required = true) {
+function verifierEtMettreAJourChamp(input, area, LSName, required = true) {
 	if (required) {
 		if (input.value.trim()) area.textContent = input.value.trim();
 	} else {
@@ -106,15 +110,21 @@ function verifierEtMettreAJouChamp(input, area, LSName, required = true) {
 }
 
 btnAjouterInteret.addEventListener("click", () => {
-	let interestContainer = document.querySelector(".interest-elements");
+	let interestContainer = document.querySelector(
+		".affichage-details-interet"
+	);
 	let echantillon = document.querySelector(".interest-info");
-	let echantillonTheme = document.getElementById("interest-theme");
-	let echantillonElements = document.getElementById("interest-elements");
+	let echantillonTheme = document.getElementById("affichage-theme-interet");
+	let echantillonElements = document.getElementById(
+		"affichage-details-interet"
+	);
 	let copiedInterest = echantillon.cloneNode(false);
 	let copiedInterestTheme = echantillonTheme.cloneNode(false);
-	copiedInterestTheme.id = "interest-theme-" + compteurInteretsAjoutes;
+	copiedInterestTheme.id =
+		"affichage-theme-interet-" + compteurInteretsAjoutes;
 	let copiedInterestElements = echantillonElements.cloneNode(false);
-	copiedInterestElements.id = "interest-elements-" + compteurInteretsAjoutes;
+	copiedInterestElements.id =
+		"affichage-details-interet-" + compteurInteretsAjoutes;
 	copiedInterest.appendChild(copiedInterestTheme);
 	copiedInterest.appendChild(copiedInterestElements);
 	// copiedElement.innerText = "";
@@ -124,24 +134,47 @@ btnAjouterInteret.addEventListener("click", () => {
 		".interest-input-container"
 	);
 	let echantillonInput = document.querySelector(".interests-input");
-	let echantillonThemeInput = document.getElementById("interest-theme-input");
+	let echantillonThemeInput = document.getElementById(
+		"affichage-theme-interet-input"
+	);
 	let echantillonElementsInput = document.getElementById(
-		"interest-elements-input"
+		"input-elements-interet"
 	);
 	let copiedInput = echantillonInput.cloneNode(true);
 	let copiedThemeInput = copiedInput.querySelector("input");
 	copiedThemeInput.value = "";
-	copiedThemeInput.id = "interest-theme-input-" + compteurInteretsAjoutes;
+	copiedThemeInput.id =
+		"affichage-theme-interet-input-" + compteurInteretsAjoutes;
 	let copiedElementsInput = copiedInput.querySelector("textarea");
 	copiedElementsInput.value = "";
 	copiedElementsInput.id =
-		"interest-elements-input-" + compteurInteretsAjoutes;
+		"input-elements-interet-" + compteurInteretsAjoutes;
 	interestInputContainer.appendChild(copiedInput);
 
 	compteurInteretsAjoutes++;
 	tousLesChampsTextarea = document.querySelectorAll("textarea");
 	tousLesChampsInput = document.querySelectorAll("input");
+
+	listener(
+		copiedThemeInput,
+		copiedElementsInput,
+		copiedInterestTheme,
+		copiedInterestElements
+	);
 });
+
+function listener(inputTheme, inputDetails, areaTheme, areaDetails) {
+	inputTheme.addEventListener("change", () => {
+		if (inputTheme) {
+			areaTheme.textContent = inputTheme.value.trim();
+		}
+	});
+	inputDetails.addEventListener("change", () => {
+		if (inputDetails) {
+			areaDetails.textContent = inputDetails.value.trim();
+		}
+	});
+}
 
 btnTelechargerCV.addEventListener("click", () => {
 	const captureZone = document.querySelector(".curiculum");
