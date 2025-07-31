@@ -25,11 +25,12 @@ var compteurInteretsAjoutes = 0
 const btnTelechargerCV = document.getElementById("btn-telecharger-cv")
 var tousLesChampsInput = document.querySelectorAll('input[type="text"]')
 var tousLesChampsTextarea = document.querySelectorAll("textarea")
+var inputInteretAjoutes = 0
 
 function restaurerDepuisLocalStorage(LSElement, input, area) {
 	let elementStored = localStorage.getItem(LSElement)
-	if (elementStored) area.textContent = elementStored
-	{
+	if (elementStored) {
+		area.textContent = elementStored
 		input.value = elementStored
 	}
 }
@@ -56,6 +57,8 @@ function ajouterCentreInteret(firstTime = true) {
 
 	if (firstTime) compteurInteretsAjoutes++
 	mettreAJourListesChamps()
+
+	sauvegarderNombreInteret()
 }
 
 function creerBlocAffichageInteret(id) {
@@ -119,6 +122,14 @@ function verifierEtMettreAJourChamp(input, area, LSName, required = true) {
 	localStorage.setItem(LSName, input.value.trim())
 }
 
+function sauvegarderNombreInteret() {
+	inputInteretAjoutes = document.querySelectorAll(".interest-info").length - 1
+	console.log(localStorage)
+	if (inputInteretAjoutes != 0) {
+		localStorage.setItem("inputInteretAjoutes", inputInteretAjoutes)
+	}
+}
+
 window.addEventListener("load", () => {
 	restaurerDepuisLocalStorage("affichagePrenom", inputPrenom, affichagePrenom)
 	restaurerDepuisLocalStorage("affichageNom", inputNom, affichageNom)
@@ -140,6 +151,11 @@ window.addEventListener("load", () => {
 		inputDetailsInteret,
 		affichageDetailsInteret
 	)
+
+	let nbInterets = parseInt(localStorage.getItem("inputInteretAjoutes") || 0)
+	for (let i = 0; i < inputInteretAjoutes; i++) {
+		ajouterCentreInteret(false)
+	}
 })
 
 tousLesChampsInput.forEach((input) => {
@@ -196,5 +212,3 @@ btnTelechargerCV.addEventListener("click", () => {
 			alert("Une erreur est survenue lors de la capture !")
 		})
 })
-
-console.log(localStorage)
