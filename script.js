@@ -21,11 +21,15 @@ const affichageDetailsInteret = document.getElementById(
 )
 
 const btnAjouterInteret = document.getElementById("btn-ajouter-interet")
-var compteurInteretsAjoutes = 0
 const btnTelechargerCV = document.getElementById("btn-telecharger-cv")
 var tousLesChampsInput = document.querySelectorAll('input[type="text"]')
 var tousLesChampsTextarea = document.querySelectorAll("textarea")
-var inputInteretAjoutes = 0
+var compteurInteretsAjoutes = parseInt(
+	localStorage.getItem("compteurInteretsAjoutes") || 0
+)
+var inputInteretAjoutes = parseInt(
+	localStorage.getItem("inputInteretAjoutes") || 0
+)
 
 function restaurerDepuisLocalStorage(LSElement, input, area) {
 	let elementStored = localStorage.getItem(LSElement)
@@ -55,7 +59,8 @@ function ajouterCentreInteret(firstTime = true) {
 		blocAffichage.details
 	)
 
-	if (firstTime) compteurInteretsAjoutes++
+	compteurInteretsAjoutes++
+	localStorage.setItem("compteurInteretsAjoutes", compteurInteretsAjoutes)
 	mettreAJourListesChamps()
 
 	sauvegarderNombreInteret()
@@ -97,6 +102,7 @@ function creerBlocFormulaireInteret(id) {
 
 function listener(inputTheme, inputDetails, areaTheme, areaDetails) {
 	inputTheme.addEventListener("change", () => {
+		localStorage.setItem(inputTheme.id, inputTheme.value.trim())
 		if (inputTheme) {
 			areaTheme.textContent = inputTheme.value.trim()
 		}
@@ -124,7 +130,6 @@ function verifierEtMettreAJourChamp(input, area, LSName, required = true) {
 
 function sauvegarderNombreInteret() {
 	inputInteretAjoutes = document.querySelectorAll(".interest-info").length - 1
-	console.log(localStorage)
 	if (inputInteretAjoutes != 0) {
 		localStorage.setItem("inputInteretAjoutes", inputInteretAjoutes)
 	}
@@ -151,10 +156,11 @@ window.addEventListener("load", () => {
 		inputDetailsInteret,
 		affichageDetailsInteret
 	)
+	compteurInteretsAjoutes = 0
 
 	let nbInterets = parseInt(localStorage.getItem("inputInteretAjoutes") || 0)
-	for (let i = 0; i < inputInteretAjoutes; i++) {
-		ajouterCentreInteret(false)
+	for (let i = 0; i < nbInterets; i++) {
+		ajouterCentreInteret()
 	}
 })
 
@@ -212,3 +218,5 @@ btnTelechargerCV.addEventListener("click", () => {
 			alert("Une erreur est survenue lors de la capture !")
 		})
 })
+
+console.log(localStorage)
