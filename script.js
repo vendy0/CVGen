@@ -162,8 +162,8 @@ function supprimerInteret() {
 	let idRemoveTheme = "theme-interet-input-" + (listeInteretsInput.length - 2)
 	localStorage.removeItem(idRemoveTheme)
 
-	inputInteretAjoutes = listeInteretsInput.length - 1
-	compteurInteretsAjoutes = listeInteretsInput.length - 1
+	inputInteretAjoutes = listeInteretsInput.length - 2
+	compteurInteretsAjoutes = listeInteretsInput.length - 2
 	localStorage.setItem("inputInteretAjoutes", inputInteretAjoutes)
 	localStorage.setItem("compteurInteretsAjoutes", compteurInteretsAjoutes)
 
