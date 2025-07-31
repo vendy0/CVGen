@@ -1,17 +1,14 @@
-/* * @format
+/** @format */
 
-/* Modern CSS Reset */
 *,
 *::before,
 *::after {
 	box-sizing: border-box;
 	margin: 0;
-	/* padding: 0; */
 }
 
 html,
 body {
-	/* height: 100%; */
 	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;
 }
@@ -22,7 +19,6 @@ video,
 canvas,
 svg {
 	display: block;
-	/* max-width: 100%; */
 }
 
 input,
@@ -31,10 +27,6 @@ textarea,
 select {
 	font: inherit;
 	resize: none;
-	/* color: inherit; */
-	/* background: none; */
-	/* border: none; */
-	/* outline: none; */
 }
 
 a {
@@ -49,13 +41,7 @@ table {
 
 body {
 	font-family: sans-serif;
-	background-color: #fff;
 	color: #000;
-	/* display: flex; */
-	/* flex-direction: column; */
-	/* align-items: center; */
-	/* justify-content: center; */
-	/* padding-block: 650px; */
 	background: #bdbdbd;
 	padding-block: 100px;
 }
@@ -72,9 +58,8 @@ body {
 	color: #474747;
 	width: 700px;
 	height: 990px;
-	overflow: hidden; /* ou scroll/auto */
+	overflow: hidden;
 	background: #f8f8f8;
-	margin-block: 100px;
 	margin: 0 auto;
 }
 
@@ -129,7 +114,7 @@ body {
 .profil,
 .interests,
 .languages,
-.habilities {
+.abilities {
 	display: flex;
 	flex-direction: column;
 	padding: 10px;
@@ -147,22 +132,12 @@ body {
 	flex-direction: row;
 	align-items: center;
 	gap: 10px;
+	margin: 10px;
 }
 
 svg {
 	height: 2em;
 }
-
-.profil-info {
-	margin: 10px;
-}
-/* 
-.language-label,
-.hability-label {
-	background: silver;
-	border-radius: 5px;
-	padding-inline: 10px;
-} */
 
 .right-column {
 	display: flex;
@@ -181,7 +156,7 @@ svg {
 }
 
 .diplome {
-	font-weight: 550;
+	font-weight: 500;
 }
 
 .right-section-label {
@@ -213,8 +188,20 @@ input {
 	font-weight: bold;
 }
 
-/* 
-#interest-theme::after {
-	contain: " : ";
+input,
+textarea,
+select {
+	padding: 5px 10px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
 }
- */
+
+input:focus {
+	border-color: #004e12;
+	outline: none;
+}
+
+button:hover {
+	transform: scale(1.05);
+	transition: all 0.3s ease;
+}
