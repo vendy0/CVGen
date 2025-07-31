@@ -81,7 +81,7 @@
 					<label for="input-telephone"
 						>Téléphone
 						<input
-							type="number"
+							type="text"
 							name="input-telephone"
 							id="input-telephone"
 							placeholder="Entrez votre numéro de téléphone"
@@ -98,7 +98,7 @@
 									>Thème
 									<input
 										type="text"
-										class="input-theme-interet-class"
+										class="input-theme-interet-class theme"
 										name="input-theme-interet"
 										id="input-theme-interet"
 										value=""
@@ -118,10 +118,42 @@
 							</fieldset>
 						</div>
 					</div>
-					<button type="button" id="btn-ajouter-interet"
+
+					<hr style="margin-block: 30px" />
+					<div class="input-langue-container">
+						<legend>Langue</legend>
+						<div class="input-langues">
+							<fieldset
+								><legend>Élément</legend>
+								<label for="input-langue-label"
+									>Thème
+									<input
+										type="text"
+										class="input-langue-label-class theme"
+										name="input-langue-label"
+										id="input-langur-label"
+										value=""
+										placeholder="Langue"
+								/></label>
+								<br />
+								<label for="input-langue-level"
+									>Éléments<textarea
+										name="input-langue-level"
+										id="input-langue-level"
+										class="input-langue-level-class"
+										rows="1"
+										cols="20"
+										resize="none"
+										placeholder="Niveau"></textarea>
+								</label>
+							</fieldset>
+						</div>
+					</div>
+
+					<button type="button" id="btn-ajouter-langue"
 						>Ajouter</button
 					>
-					<button type="button" id="btn-supprimer-interet"
+					<button type="button" id="btn-supprimer-langue"
 						>Supprimer</button
 					>
 				</fieldset>
@@ -220,16 +252,8 @@
 						<hr />
 						<div class="language-elements">
 							<div class="language-info">
-								<span class="language-icon">Créole</span>
-								<span class="language-label">Maternelle</span>
-							</div>
-							<div class="language-info">
-								<span class="language-icon">Français</span>
-								<span class="language-label">Avancé</span>
-							</div>
-							<div class="language-info">
-								<span class="language-icon">Anglais</span>
-								<span class="language-label">Moyen</span>
+								<span class="theme-language theme">Créole</span>
+								<span class="language-level">Maternelle</span>
 							</div>
 						</div>
 					</section>
