@@ -91,13 +91,13 @@ function creerBlocFormulaireInteret(id) {
 
 // Ajoute les écouteurs qui synchronisent formulaire et affichage en direct + stockage local
 function listener(inputTheme, inputDetails, areaTheme, areaDetails) {
-	inputTheme.addEventListener("change", () => {
+	inputTheme.addEventListener("input", () => {
 		localStorage.setItem(inputTheme.id, inputTheme.value.trim())
 		if (inputTheme) {
 			areaTheme.textContent = inputTheme.value.trim()
 		}
 	})
-	inputDetails.addEventListener("change", () => {
+	inputDetails.addEventListener("input", () => {
 		localStorage.setItem(inputDetails.id, inputDetails.value.trim())
 		if (inputDetails) {
 			areaDetails.textContent = inputDetails.value.trim()
@@ -233,7 +233,7 @@ window.addEventListener("load", () => {
 
 // Mise à jour des champs principaux lors de toute modification
 tousLesChampsInput.forEach((input) => {
-	input.addEventListener("change", () => {
+	input.addEventListener("input", () => {
 		verifierEtMettreAJourChamp(
 			inputPrenom,
 			affichagePrenom,
@@ -258,7 +258,7 @@ tousLesChampsInput.forEach((input) => {
 
 // Mise à jour des zones de texte lors de toute modification
 tousLesChampsTextarea.forEach((textArea) => {
-	textArea.addEventListener("change", () => {
+	textArea.addEventListener("input", () => {
 		verifierEtMettreAJourChamp(
 			inputDetailsInteret,
 			affichageDetailsInteret,
