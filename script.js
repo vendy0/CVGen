@@ -1,5 +1,6 @@
 /** @format */
 
+// Récupération des éléments du formulaire
 const inputPrenom = document.getElementById("input-prenom")
 const inputNom = document.getElementById("input-nom")
 const inputPoste = document.getElementById("input-poste")
@@ -9,6 +10,7 @@ const inputPhone = document.getElementById("input-telephone")
 const inputThemeInteret = document.getElementById("input-theme-interet")
 const inputDetailsInteret = document.getElementById("input-details-interet")
 
+// Récupération des zones d'affichage du CV
 const affichageThemeInteret = document.getElementById("affichage-theme-interet")
 const affichagePrenom = document.getElementById("affichage-prenom")
 const affichageNom = document.getElementById("affichage-nom")
@@ -20,10 +22,15 @@ const affichageDetailsInteret = document.getElementById(
 	"affichage-details-interet"
 )
 
+// Boutons principaux
 const btnAjouterInteret = document.getElementById("btn-ajouter-interet")
 const btnTelechargerCV = document.getElementById("btn-telecharger-cv")
+
+// Sélection des champs de saisie texte
 var tousLesChampsInput = document.querySelectorAll('input[type="text"]')
 var tousLesChampsTextarea = document.querySelectorAll("textarea")
+
+// Compteurs de centres d'intérêt ajoutés (sauvegardés dans le localStorage)
 var compteurInteretsAjoutes = parseInt(
 	localStorage.getItem("compteurInteretsAjoutes") || 0
 )
@@ -31,6 +38,7 @@ var inputInteretAjoutes = parseInt(
 	localStorage.getItem("inputInteretAjoutes") || 0
 )
 
+// Restaure la valeur d'un champ depuis le localStorage
 function restaurerDepuisLocalStorage(LSElement, input, area) {
 	let elementStored = localStorage.getItem(LSElement)
 	if (elementStored) {
@@ -39,6 +47,7 @@ function restaurerDepuisLocalStorage(LSElement, input, area) {
 	}
 }
 
+// Ajoute dynamiquement un bloc de centre d’intérêt
 function ajouterCentreInteret(firstTime = true) {
 	const id = compteurInteretsAjoutes
 
@@ -66,6 +75,7 @@ function ajouterCentreInteret(firstTime = true) {
 	sauvegarderNombreInteret()
 }
 
+// Crée un bloc d’affichage d’intérêt (dans la prévisualisation CV)
 function creerBlocAffichageInteret(id) {
 	const echantillon = document.querySelector(".interest-info")
 	const echantillonTheme = document.getElementById("affichage-theme-interet")
@@ -85,6 +95,7 @@ function creerBlocAffichageInteret(id) {
 	return {bloc, theme, details}
 }
 
+// Crée un bloc de formulaire d’intérêt (dans la zone formulaire)
 function creerBlocFormulaireInteret(id) {
 	let echantillonInput = document.querySelector(".input-interets")
 
@@ -100,6 +111,7 @@ function creerBlocFormulaireInteret(id) {
 	return {bloc, theme, details}
 }
 
+// Ajoute les écouteurs de modification entre formulaire et affichage
 function listener(inputTheme, inputDetails, areaTheme, areaDetails) {
 	inputTheme.addEventListener("change", () => {
 		localStorage.setItem(inputTheme.id, inputTheme.value.trim())
@@ -114,11 +126,13 @@ function listener(inputTheme, inputDetails, areaTheme, areaDetails) {
 	})
 }
 
+// Met à jour les listes de champs de saisie
 function mettreAJourListesChamps() {
 	tousLesChampsTextarea = document.querySelectorAll("textarea")
 	tousLesChampsInput = document.querySelectorAll("input")
 }
 
+// Vérifie, met à jour et sauvegarde un champ texte (ou textarea)
 function verifierEtMettreAJourChamp(input, area, LSName, required = true) {
 	if (required) {
 		if (input.value.trim()) area.textContent = input.value.trim()
@@ -128,6 +142,7 @@ function verifierEtMettreAJourChamp(input, area, LSName, required = true) {
 	localStorage.setItem(LSName, input.value.trim())
 }
 
+// Sauvegarde le nombre d’intérêts ajoutés
 function sauvegarderNombreInteret() {
 	inputInteretAjoutes = document.querySelectorAll(".interest-info").length - 1
 	if (inputInteretAjoutes != 0) {
@@ -135,7 +150,9 @@ function sauvegarderNombreInteret() {
 	}
 }
 
+// Initialisation au chargement de la page
 window.addEventListener("load", () => {
+	// Restauration des champs principaux depuis localStorage
 	restaurerDepuisLocalStorage("affichagePrenom", inputPrenom, affichagePrenom)
 	restaurerDepuisLocalStorage("affichageNom", inputNom, affichageNom)
 	restaurerDepuisLocalStorage("affichagePoste", inputPoste, affichagePoste)
@@ -158,18 +175,21 @@ window.addEventListener("load", () => {
 	)
 	compteurInteretsAjoutes = 0
 
+	// Réajout des centres d’intérêt précédemment enregistrés
 	let nbInterets = parseInt(localStorage.getItem("inputInteretAjoutes") || 0)
 	for (let i = 0; i < nbInterets; i++) {
 		ajouterCentreInteret()
 		let theme = document.getElementById(
 			"affichage-theme-interet-input-" + i
 		)
-		theme.value = 
-			localStorage.getItem("affichage-theme-interet-input-" + i)
-		console.log(theme)
+		theme.value = localStorage.getItem("affichage-theme-interet-input-" + i)
+		let affichage = document.getElementById("affichage-theme-interet-" + i)
+		affichage.textContent = theme.value
+
 	}
 })
 
+// Mise à jour des champs principaux lors des changements
 tousLesChampsInput.forEach((input) => {
 	input.addEventListener("change", () => {
 		verifierEtMettreAJourChamp(
@@ -194,6 +214,7 @@ tousLesChampsInput.forEach((input) => {
 	})
 })
 
+// Mise à jour des zones de texte lors des changements
 tousLesChampsTextarea.forEach((textArea) => {
 	textArea.addEventListener("change", () => {
 		verifierEtMettreAJourChamp(
@@ -205,8 +226,10 @@ tousLesChampsTextarea.forEach((textArea) => {
 	})
 })
 
+// Ajout dynamique d’un intérêt lors du clic sur le bouton
 btnAjouterInteret.addEventListener("click", ajouterCentreInteret)
 
+// Capture et téléchargement du CV en PNG
 btnTelechargerCV.addEventListener("click", () => {
 	const captureZone = document.querySelector(".curiculum")
 	html2canvas(captureZone)
@@ -225,4 +248,5 @@ btnTelechargerCV.addEventListener("click", () => {
 		})
 })
 
+// Affiche le contenu actuel du localStorage dans la console
 console.log(localStorage)
