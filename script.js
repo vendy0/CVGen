@@ -28,24 +28,36 @@ var compteurInteretsAjoutes = 0;
 
 const btnTelechargerCV = document.getElementById("btn-telecharger-cv");
 
-var tousLesChampsInput = document.querySelectorAll("input");
+var tousLesChampsInput = document.querySelectorAll('input[type="text"]');
 tousLesChampsInput.forEach((input) => {
 	input.addEventListener("change", () => {
-		verifierEtMettreAJouChamp(
+		verifierEtMettreAJourChamp(
 			inputPrenom,
 			affichagePrenom,
 			"affichagePrenom"
 		);
-		verifierEtMettreAJouChamp(inputNom, affichageNom, "affichageNom");
-		verifierEtMettreAJouChamp(inputPoste, affichagePoste, "affichagePoste");
-		verifierEtMettreAJouChamp(
+		verifierEtMettreAJourChamp(inputNom, affichageNom, "affichageNom");
+		verifierEtMettreAJourChamp(
+			inputPoste,
+			affichagePoste,
+			"affichagePoste"
+		);
+		verifierEtMettreAJourChamp(
 			inputLocalisation,
 			affichageLocalisation,
 			"affichageLocalisation"
 		);
-		verifierEtMettreAJouChamp(inputEmail, affichageEmail, "affichageEmail");
-		verifierEtMettreAJouChamp(inputPhone, affichagePhone, "affichagePhone");
-		verifierEtMettreAJouChamp(
+		verifierEtMettreAJourChamp(
+			inputEmail,
+			affichageEmail,
+			"affichageEmail"
+		);
+		verifierEtMettreAJourChamp(
+			inputPhone,
+			affichagePhone,
+			"affichagePhone"
+		);
+		verifierEtMettreAJourChamp(
 			inputThemeInteret,
 			affichageThemeInteret,
 			"affichageThemeInteret"
@@ -109,59 +121,65 @@ function verifierEtMettreAJourChamp(input, area, LSName, required = true) {
 	localStorage.setItem(LSName, input.value.trim());
 }
 
-btnAjouterInteret.addEventListener("click", () => {
-	let interestContainer = document.querySelector(
-		".affichage-details-interet"
-	);
-	let echantillon = document.querySelector(".interest-info");
-	let echantillonTheme = document.getElementById("affichage-theme-interet");
-	let echantillonElements = document.getElementById(
-		"affichage-details-interet"
-	);
-	let copiedInterest = echantillon.cloneNode(false);
-	let copiedInterestTheme = echantillonTheme.cloneNode(false);
-	copiedInterestTheme.id =
-		"affichage-theme-interet-" + compteurInteretsAjoutes;
-	let copiedInterestElements = echantillonElements.cloneNode(false);
-	copiedInterestElements.id =
-		"affichage-details-interet-" + compteurInteretsAjoutes;
-	copiedInterest.appendChild(copiedInterestTheme);
-	copiedInterest.appendChild(copiedInterestElements);
-	// copiedElement.innerText = "";
-	interestContainer.appendChild(copiedInterest);
+btnAjouterInteret.addEventListener("click", ajouterCentreInteret);
 
-	let interestInputContainer = document.querySelector(
-		".interest-input-container"
-	);
-	let echantillonInput = document.querySelector(".interests-input");
-	let echantillonThemeInput = document.getElementById(
-		"affichage-theme-interet-input"
-	);
-	let echantillonElementsInput = document.getElementById(
-		"input-elements-interet"
-	);
-	let copiedInput = echantillonInput.cloneNode(true);
-	let copiedThemeInput = copiedInput.querySelector("input");
-	copiedThemeInput.value = "";
-	copiedThemeInput.id =
-		"affichage-theme-interet-input-" + compteurInteretsAjoutes;
-	let copiedElementsInput = copiedInput.querySelector("textarea");
-	copiedElementsInput.value = "";
-	copiedElementsInput.id =
-		"input-elements-interet-" + compteurInteretsAjoutes;
-	interestInputContainer.appendChild(copiedInput);
+function ajouterCentreInteret() {
+	const id = compteurInteretsAjoutes;
 
-	compteurInteretsAjoutes++;
-	tousLesChampsTextarea = document.querySelectorAll("textarea");
-	tousLesChampsInput = document.querySelectorAll("input");
+	const blocAffichage = creerBlocAffichageInteret(id);
+	const blocFormulaire = creerBlocFormulaireInteret(id);
+
+	document
+		.querySelector(".affichage-interet-container")
+		.appendChild(blocAffichage.bloc);
+	document
+		.querySelector(".input-interet-container")
+		.appendChild(blocFormulaire.bloc);
 
 	listener(
-		copiedThemeInput,
-		copiedElementsInput,
-		copiedInterestTheme,
-		copiedInterestElements
+		blocFormulaire.theme,
+		blocFormulaire.details,
+		blocAffichage.theme,
+		blocAffichage.details
 	);
-});
+
+	compteurInteretsAjoutes++;
+	mettreAJourListesChamps();
+}
+
+function creerBlocAffichageInteret(id) {
+	const echantillon = document.querySelector(".interest-info");
+	const echantillonTheme = document.getElementById("affichage-theme-interet");
+	const echantillonDetails = document.getElementById(
+		"affichage-details-interet"
+	);
+
+	let bloc = echantillon.cloneNode(false);
+	let theme = echantillonTheme.cloneNode(false);
+	theme.id = "affichage-theme-interet-" + id;
+	let details = echantillonDetails.cloneNode(false);
+	details.id = "affichage-details-interet-" + id;
+
+	bloc.appendChild(theme);
+	bloc.appendChild(details);
+
+	return {bloc, theme, details};
+}
+
+function creerBlocFormulaireInteret(id) {
+	let echantillonInput = document.querySelector(".input-interets");
+
+	let bloc = echantillonInput.cloneNode(true);
+	let theme = bloc.querySelector("input");
+	theme.value = "";
+	theme.id = "affichage-theme-interet-input-" + id;
+
+	let details = bloc.querySelector("textarea");
+	details.value = "";
+	details.id = "input-elements-interet-" + id;
+
+	return {bloc, theme, details};
+}
 
 function listener(inputTheme, inputDetails, areaTheme, areaDetails) {
 	inputTheme.addEventListener("change", () => {
@@ -175,6 +193,78 @@ function listener(inputTheme, inputDetails, areaTheme, areaDetails) {
 		}
 	});
 }
+
+function mettreAJourListesChamps(){
+	tousLesChampsTextarea = document.querySelectorAll("textarea");
+	tousLesChampsInput = document.querySelectorAll("input");
+}
+
+// btnAjouterInteret.addEventListener("click", () => {
+// 	let interestContainer = document.querySelector(
+// 		".affichage-details-interet"
+// 	);
+// 	let echantillon = document.querySelector(".interest-info");
+// 	let echantillonTheme = document.getElementById("affichage-theme-interet");
+// 	let echantillonElements = document.getElementById(
+// 		"affichage-details-interet"
+// 	);
+// 	let copiedInterest = echantillon.cloneNode(false);
+// 	let copiedInterestTheme = echantillonTheme.cloneNode(false);
+// 	copiedInterestTheme.id =
+// 		"affichage-theme-interet-" + compteurInteretsAjoutes;
+// 	let copiedInterestElements = echantillonElements.cloneNode(false);
+// 	copiedInterestElements.id =
+// 		"affichage-details-interet-" + compteurInteretsAjoutes;
+// 	copiedInterest.appendChild(copiedInterestTheme);
+// 	copiedInterest.appendChild(copiedInterestElements);
+// 	// copiedElement.innerText = "";
+// 	interestContainer.appendChild(copiedInterest);
+
+// 	let interestInputContainer = document.querySelector(
+// 		".interest-input-container"
+// 	);
+// 	let echantillonInput = document.querySelector(".interests-input");
+// 	let echantillonThemeInput = document.getElementById(
+// 		"affichage-theme-interet-input"
+// 	);
+// 	let echantillonElementsInput = document.getElementById(
+// 		"input-elements-interet"
+// 	);
+// 	let copiedInput = echantillonInput.cloneNode(true);
+// 	let copiedThemeInput = copiedInput.querySelector("input");
+// 	copiedThemeInput.value = "";
+// 	copiedThemeInput.id =
+// 		"affichage-theme-interet-input-" + compteurInteretsAjoutes;
+// 	let copiedElementsInput = copiedInput.querySelector("textarea");
+// 	copiedElementsInput.value = "";
+// 	copiedElementsInput.id =
+// 		"input-elements-interet-" + compteurInteretsAjoutes;
+// 	interestInputContainer.appendChild(copiedInput);
+
+// 	compteurInteretsAjoutes++;
+// 	tousLesChampsTextarea = document.querySelectorAll("textarea");
+// 	tousLesChampsInput = document.querySelectorAll("input");
+
+// 	listener(
+// 		copiedThemeInput,
+// 		copiedElementsInput,
+// 		copiedInterestTheme,
+// 		copiedInterestElements
+// 	);
+// });
+
+// function listener(inputTheme, inputDetails, areaTheme, areaDetails) {
+// 	inputTheme.addEventListener("change", () => {
+// 		if (inputTheme) {
+// 			areaTheme.textContent = inputTheme.value.trim();
+// 		}
+// 	});
+// 	inputDetails.addEventListener("change", () => {
+// 		if (inputDetails) {
+// 			areaDetails.textContent = inputDetails.value.trim();
+// 		}
+// 	});
+// }
 
 btnTelechargerCV.addEventListener("click", () => {
 	const captureZone = document.querySelector(".curiculum");
