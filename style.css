@@ -164,7 +164,7 @@ svg {
 	padding-inline: 10px;
 } */
 
-.rigth-column {
+.right-column {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -184,7 +184,7 @@ svg {
 	font-weight: 550;
 }
 
-.rigth-section-label {
+.right-section-label {
 	font-size: 1.2em;
 }
 
